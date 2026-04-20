@@ -122,6 +122,95 @@
     .region-charger-info .rci-num{font-size:15px}
     .region-charger-info .rci-label,.region-charger-info .rci-unit{font-size:10px}
   }
+
+  /* 주간 수정 내역 뷰 */
+  #weekly-container{display:none;padding:20px 1.5rem 40px;max-width:1200px;margin:0 auto}
+  #weekly-container.show{display:block}
+  .weekly-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+  .weekly-title{font-size:18px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
+  .weekly-title span{font-size:22px}
+  .weekly-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .wk-nav-btn{padding:7px 14px;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;font-family:'Pretendard',sans-serif}
+  .wk-nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .wk-nav-btn.wk-today{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .wk-nav-btn.wk-today:hover{opacity:.85}
+  .wk-current{font-size:14px;font-weight:700;color:var(--text);padding:7px 14px;background:var(--surface2);border-radius:7px}
+  .weekly-stats{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+  .wk-stat{padding:12px 18px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text2);font-weight:600}
+  .wk-stat-num{font-size:22px;font-weight:800;color:var(--accent)}
+  .wk-empty{text-align:center;padding:60px 20px;color:var(--text3);font-size:15px;background:var(--surface);border-radius:12px;border:1.5px dashed var(--border)}
+  .wk-empty-sub{font-size:12px;color:var(--text3);display:inline-block;margin-top:8px;opacity:.7}
+  .wk-day{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden}
+  .wk-day-hd{padding:12px 16px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+  .wk-day-date{font-size:14px;font-weight:700;color:var(--text)}
+  .wk-day-date.today{color:var(--accent)}
+  .wk-day-cnt{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-bg);padding:3px 10px;border-radius:12px}
+  .wk-day-list{display:flex;flex-direction:column}
+  .wk-item{display:flex;flex-direction:column;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;gap:8px}
+  .wk-item-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;width:100%}
+  .wk-item:last-child{border-bottom:none}
+  .wk-item:hover{background:var(--surface2)}
+  .wk-item-main{flex:1;min-width:200px}
+  .wk-item-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .wk-time{font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-bg);padding:2px 7px;border-radius:4px}
+  .wk-item-sub{font-size:11px;color:var(--text3)}
+  .wk-item-meta{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+  .wk-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap}
+  .wk-tag.visitor{background:#dbeafe;color:#1e40af}
+  .wk-tag.progress{background:#fef3c7;color:#92400e}
+  .wk-tag.ch{background:#e0e7ff;color:#3730a3}
+  .wk-tag.grade{color:#fff;padding:3px 9px}
+  .wk-tag.grade-sv{background:#7c3aed}
+  .wk-tag.grade-v{background:#9333ea}
+  .wk-tag.grade-s{background:#0891b2}
+  .wk-tag.grade-a{background:#16a34a}
+  .wk-tag.grade-b{background:#65a30d}
+  .wk-tag.grade-c{background:#ca8a04}
+  .wk-tag.grade-d{background:#ea580c}
+  .wk-tag.grade-f{background:#dc2626}
+  body.dark .wk-tag.visitor{background:rgba(59,130,246,.22);color:#93c5fd}
+  body.dark .wk-tag.progress{background:rgba(234,179,8,.22);color:#fde047}
+  body.dark .wk-tag.ch{background:rgba(99,102,241,.22);color:#a5b4fc}
+  /* 변경 내역 - 접기/펼치기 래퍼 */
+  .wk-changes-wrap{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+  .wk-toggle-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--accent);font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;font-family:'Pretendard',sans-serif;width:fit-content}
+  .wk-toggle-btn:hover{background:var(--accent-bg);border-color:var(--accent)}
+  .wk-toggle-icon{font-size:9px;color:var(--accent);transition:transform .15s}
+  /* 변경 내역 본문 */
+  .wk-changes{flex-direction:column;gap:10px;padding:12px;background:var(--surface2);border-radius:6px;border-left:3px solid var(--accent)}
+  .wk-change{display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.5}
+  .wk-ch-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .wk-ch-label{font-weight:700;color:var(--text);background:var(--surface);padding:3px 10px;border-radius:4px;border:1px solid var(--border);white-space:nowrap;flex-shrink:0;font-size:11px}
+  .wk-ch-action{font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;white-space:nowrap}
+  .wk-ch-action.add{background:#dcfce7;color:#15803d}
+  .wk-ch-action.del{background:#fee2e2;color:#991b1b}
+  .wk-ch-action.mod{background:#dbeafe;color:#1e40af}
+  /* 좌우 배치 - 이전 | → | 변경 */
+  .wk-ch-sidebyside{display:flex;gap:10px;align-items:stretch;padding-left:4px}
+  .wk-ch-col{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;padding:8px 10px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+  .wk-ch-coltag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;align-self:flex-start}
+  .wk-ch-coltag.before{background:#fee2e2;color:#991b1b}
+  .wk-ch-coltag.after{background:#dcfce7;color:#15803d}
+  .wk-ch-arrow-mid{display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);font-size:16px;flex-shrink:0;padding:0 2px}
+  .wk-ch-text{font-size:12px;line-height:1.6;color:var(--text);word-break:break-word;white-space:pre-wrap}
+  .wk-ch-text.line-through{color:var(--text3);text-decoration:line-through;opacity:.75}
+  body.dark .wk-ch-action.add,body.dark .wk-ch-coltag.after{background:rgba(34,197,94,.22);color:#86efac}
+  body.dark .wk-ch-action.del,body.dark .wk-ch-coltag.before{background:rgba(239,68,68,.22);color:#fca5a5}
+  body.dark .wk-ch-action.mod{background:rgba(59,130,246,.22);color:#93c5fd}
+  @media(max-width:640px){
+    #weekly-container{padding:14px 12px 30px}
+    .weekly-title{font-size:15px}
+    .wk-nav-btn,.wk-current{font-size:11px;padding:6px 10px}
+    .wk-stat{padding:10px 14px}
+    .wk-stat-num{font-size:18px}
+    .wk-item{padding:10px 12px}
+    .wk-item-name{font-size:13px}
+    .wk-change{font-size:11px}
+    .wk-ch-label{font-size:10px;padding:2px 7px}
+    .wk-ch-sidebyside{flex-direction:column;gap:6px}
+    .wk-ch-arrow-mid{transform:rotate(90deg);align-self:center;padding:2px 0}
+    .wk-ch-text{font-size:11px}
+  }
 </style>
 </head>
 <body>
@@ -132,6 +221,7 @@
     <div class="view-toggle">
       <button class="view-btn active" id="btn-list" onclick="setView('list')">📋 목록</button>
       <button class="view-btn" id="btn-map" onclick="setView('map')">🗺️ 지도</button>
+      <button class="view-btn" id="btn-weekly" onclick="setView('weekly')">📅 주간</button>
     </div>
     <button type="button" class="hd-btn" onclick="toggleDark()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span id="dark-label">다크</span></button>
   </div>
@@ -176,6 +266,19 @@
   <div id="naver-map" style="width:100%;height:100%"></div>
   <div class="map-legend"><div class="map-legend-item"><div class="map-legend-dot" style="background:#dc2626"></div>3개월 이내</div><div class="map-legend-item"><div class="map-legend-dot" style="background:#ea580c"></div>6개월 이내</div><div class="map-legend-item"><div class="map-legend-dot" style="background:#2563eb"></div>1년 이내</div><div class="map-legend-item"><div class="map-legend-dot" style="background:#16a34a"></div>1년 이상</div><div class="map-legend-item"><div class="map-legend-dot" style="background:#94a3b8"></div>만료/없음</div></div>
 </div>
+<div id="weekly-container">
+  <div class="weekly-head">
+    <div class="weekly-title"><span>📅</span> 주간 수정 내역</div>
+    <div class="weekly-nav">
+      <button class="wk-nav-btn" onclick="weeklyShift(-1)">◀ 이전</button>
+      <div class="wk-current" id="wk-current"></div>
+      <button class="wk-nav-btn" onclick="weeklyShift(1)">다음 ▶</button>
+      <button class="wk-nav-btn wk-today" onclick="weeklyShift(0)">오늘</button>
+    </div>
+  </div>
+  <div class="weekly-stats" id="weekly-stats"></div>
+  <div class="weekly-body" id="weekly-body"></div>
+</div>
 <div id="overlay"><div id="panel"></div></div>
 
 <script>
@@ -192,9 +295,21 @@ const fbRef=fbDB.ref('sev_edits');
 
 const EDITABLE_FIELDS=['progress','visitor','updateDate','otherCPO','otherBrand','hevParking','fieldNote','etcNote','address','directions','memo','etcInfo'];
 
-function fbSave(name,fields){
+function fbSave(name,fields,changes){
   const key=name.replace(/[.#$\/\[\]]/g,'_');
-  fbRef.child(key).set({name,...fields});
+  const now=new Date();
+  const nowStr=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const loc=locations.find(l=>l.name===name);
+  // changeLog에 이번 변경사항 누적 (최근 30건 유지)
+  let changeLog=(loc&&loc.changeLog)?loc.changeLog.slice():[];
+  if(changes&&changes.length>0){
+    changeLog.unshift({time:now.getTime(),timeStr:nowStr,changes:changes});
+    if(changeLog.length>30)changeLog=changeLog.slice(0,30);
+  }
+  const payload={name,...fields,lastModified:now.getTime(),lastModifiedStr:nowStr,changeLog};
+  // 로컬 locations 배열에도 즉시 반영
+  if(loc){loc.lastModified=now.getTime();loc.lastModifiedStr=nowStr;loc.changeLog=changeLog;}
+  fbRef.child(key).set(payload);
 }
 
 function fbLoadAndApply(){
@@ -205,6 +320,9 @@ function fbLoadAndApply(){
       if(!loc)return;
       EDITABLE_FIELDS.forEach(f=>{if(edit[f]!==undefined)loc[f]=edit[f];});
       if(edit.updateHistory)loc.updateHistory=edit.updateHistory;
+      if(edit.lastModified)loc.lastModified=edit.lastModified;
+      if(edit.lastModifiedStr)loc.lastModifiedStr=edit.lastModifiedStr;
+      if(edit.changeLog)loc.changeLog=edit.changeLog;
     });
     const progs=[...new Set(locations.map(l=>l.progress).filter(Boolean))].sort();
     const psel=document.getElementById('f-progress');
@@ -291,7 +409,183 @@ function renderGrid(){const grid=document.getElementById('grid');const empty=doc
     html+=`<div class="card" onclick="openDetail(${li})"><div class="c-bar ${l.urgency}"></div><div class="c-inner"><div class="c-top"><div class="c-name">${l.name||'-'}</div><div class="c-chips">${l.grade?`<span class="chip ${gc}">${l.grade}</span>`:''}${l.installed?`<span class="chip charger">${l.installed}기</span>`:''}${l.progress?`<span class="chip progress">${l.progress}</span>`:''}</div></div><div class="c-addr">${l.sigungu} · ${l.address||''}</div><div class="c-tags">${l.slow_?`<span class="tag">완속 ${l.slow_}</span>`:''}${l.fast&&l.fast!=='0'?`<span class="tag">급속 ${l.fast}</span>`:''}${isParking(l.hevParking)?'<span class="tag ok">병행주차✓</span>':''}${l.otherBrand?`<span class="tag">타사:${l.otherBrand}</span>`:''}</div><div class="c-rem-row"><span class="c-rem ${l.urgency}">${urgLabel(l.daysLeft)}</span>${ym?`<span class="c-ym ${l.urgency}">${ym}</span>`:''}</div>${l.endDate?`<div class="c-end">만료: ${l.endDate}</div>`:''}${l.updateDate?`<div class="c-visit ${visitStatus(l.updateDate)}">최근 점검: ${l.updateDate}${visitBadge(l.updateDate)}</div>`:'<div class="c-visit none">점검 기록 없음</div>'}<div class="c-foot"><div class="c-rev">3월 <span>${fmtRev(l.rev3)}</span>원/기${l.fastRevenue?` · 급속 <span>${fmtRev(Number(l.fastRevenue)||l.fastRevenue)}</span>`:''}</div>${mini}</div></div></div>`;});grid.innerHTML=html;}
 
 // ── View Toggle ──
-function setView(mode){currentView=mode;document.getElementById('btn-list').classList.toggle('active',mode==='list');document.getElementById('btn-map').classList.toggle('active',mode==='map');document.getElementById('main-view').classList.toggle('hide',mode==='map');document.getElementById('map-container').classList.toggle('show',mode==='map');if(mode==='map'){if(!mapReady)initMap();else updateMapMarkers();}}
+function setView(mode){
+  currentView=mode;
+  document.getElementById('btn-list').classList.toggle('active',mode==='list');
+  document.getElementById('btn-map').classList.toggle('active',mode==='map');
+  document.getElementById('btn-weekly').classList.toggle('active',mode==='weekly');
+  document.getElementById('main-view').classList.toggle('hide',mode!=='list');
+  document.getElementById('map-container').classList.toggle('show',mode==='map');
+  document.getElementById('weekly-container').classList.toggle('show',mode==='weekly');
+  if(mode==='map'){if(!mapReady)initMap();else updateMapMarkers();}
+  if(mode==='weekly')renderWeekly();
+}
+
+// ── 주간 수정 내역 뷰 ──
+let weeklyOffset=0; // 0 = 이번주, -1 = 지난주
+function getWeekRange(offset){
+  const d=new Date(TODAY);
+  const day=d.getDay(); // 0=일, 1=월
+  const monday=new Date(d);
+  monday.setDate(d.getDate()-((day+6)%7)+offset*7);
+  monday.setHours(0,0,0,0);
+  const sunday=new Date(monday);
+  sunday.setDate(monday.getDate()+6);
+  sunday.setHours(23,59,59,999);
+  return {start:monday,end:sunday};
+}
+function fmtWeek(start,end){
+  const f=d=>`${d.getMonth()+1}/${d.getDate()}`;
+  return `${start.getFullYear()}년 ${f(start)} ~ ${f(end)}`;
+}
+function parseUpdateDate(s){
+  if(!s)return null;
+  const m=String(s).match(/(\d{4})[-.](\d{1,2})[-.](\d{1,2})/);
+  if(!m)return null;
+  const d=new Date(+m[1],+m[2]-1,+m[3]);
+  return isNaN(d)?null:d;
+}
+function weeklyShift(dir){
+  if(dir===0)weeklyOffset=0;
+  else weeklyOffset+=dir;
+  renderWeekly();
+}
+// 필드명 한글화
+const FIELD_LABEL={
+  progress:'진행내용',visitor:'방문자',updateDate:'점검일자',otherCPO:'지상 타사',
+  otherBrand:'타사 브랜드',hevParking:'HEV 병행주차',fieldNote:'현장확인/진행사항',
+  etcNote:'기타사항',address:'도로명 주소',directions:'찾아가는 정보',memo:'메모',
+  etcInfo:'기타정보',updateHistory:'이전 기록'
+};
+function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br>');}
+function toggleChanges(id){
+  const el=document.getElementById(id);
+  const ic=document.getElementById(id+'-icon');
+  if(!el)return;
+  const hidden=el.style.display==='none';
+  el.style.display=hidden?'flex':'none';
+  if(ic)ic.textContent=hidden?'▲':'▼';
+}
+function renderChange(ch){
+  const label=FIELD_LABEL[ch.field]||ch.field;
+  const before=escHtml(ch.before);
+  const after=escHtml(ch.after);
+  if(ch.action==='삭제'||ch.action==='이전 기록 삭제'){
+    return `<div class="wk-change"><div class="wk-ch-top"><span class="wk-ch-label">${label}</span><span class="wk-ch-action del">🗑 ${ch.action}</span></div><div class="wk-ch-sidebyside"><div class="wk-ch-col"><div class="wk-ch-coltag before">삭제된 값</div><div class="wk-ch-text line-through">${before||'-'}</div></div></div></div>`;
+  }
+  if(!before&&after){
+    return `<div class="wk-change"><div class="wk-ch-top"><span class="wk-ch-label">${label}</span><span class="wk-ch-action add">+ 추가</span></div><div class="wk-ch-sidebyside"><div class="wk-ch-col"><div class="wk-ch-coltag after">추가</div><div class="wk-ch-text">${after}</div></div></div></div>`;
+  }
+  if(before&&!after){
+    return `<div class="wk-change"><div class="wk-ch-top"><span class="wk-ch-label">${label}</span><span class="wk-ch-action del">− 비움</span></div><div class="wk-ch-sidebyside"><div class="wk-ch-col"><div class="wk-ch-coltag before">삭제된 값</div><div class="wk-ch-text line-through">${before}</div></div></div></div>`;
+  }
+  return `<div class="wk-change"><div class="wk-ch-top"><span class="wk-ch-label">${label}</span><span class="wk-ch-action mod">✏ 수정</span></div><div class="wk-ch-sidebyside"><div class="wk-ch-col"><div class="wk-ch-coltag before">이전</div><div class="wk-ch-text line-through">${before}</div></div><div class="wk-ch-arrow-mid">→</div><div class="wk-ch-col"><div class="wk-ch-coltag after">변경</div><div class="wk-ch-text">${after}</div></div></div></div>`;
+}
+
+function renderWeekly(){
+  const {start,end}=getWeekRange(weeklyOffset);
+  const startMs=start.getTime(),endMs=end.getTime();
+  const base=currentRegion?locations.filter(l=>l.do_===currentRegion):locations;
+  // 해당 주에 수정된 국소 필터링 (lastModified 우선, 없으면 updateDate)
+  const updated=base.map(l=>{
+    let dt=null;
+    // 1순위: lastModified (Firebase 저장 타임스탬프 - 모든 편집 캐치)
+    if(l.lastModified){
+      const d=new Date(l.lastModified);
+      if(d>=start&&d<=end)dt=d;
+    }
+    // 2순위: updateDate (수기 입력 날짜, lastModified 없는 기존 데이터용)
+    if(!dt){
+      const d=parseUpdateDate(l.updateDate);
+      if(d&&d>=start&&d<=end)dt=d;
+    }
+    return dt?{loc:l,dt}:null;
+  }).filter(Boolean);
+  // 날짜별 그룹 (최신순)
+  updated.sort((a,b)=>b.dt-a.dt);
+  const byDate={};
+  updated.forEach(u=>{
+    const k=`${u.dt.getFullYear()}-${String(u.dt.getMonth()+1).padStart(2,'0')}-${String(u.dt.getDate()).padStart(2,'0')}`;
+    if(!byDate[k])byDate[k]=[];
+    byDate[k].push({loc:u.loc,dt:u.dt});
+  });
+  // 현재 주차 표시
+  document.getElementById('wk-current').textContent=fmtWeek(start,end)+(weeklyOffset===0?' (이번 주)':weeklyOffset===-1?' (지난 주)':weeklyOffset<0?` (${Math.abs(weeklyOffset)}주 전)`:` (${weeklyOffset}주 후)`);
+  // 통계
+  const stats=document.getElementById('weekly-stats');
+  const uniqSigungu=new Set(updated.map(u=>u.loc.sigungu)).size;
+  const uniqVisitor=new Set(updated.map(u=>(u.loc.visitor||'').trim()).filter(Boolean)).size;
+  stats.innerHTML=`<div class="wk-stat"><span class="wk-stat-num">${updated.length}</span>수정된 국소</div><div class="wk-stat"><span class="wk-stat-num">${uniqSigungu}</span>시구군</div><div class="wk-stat"><span class="wk-stat-num">${uniqVisitor}</span>방문자</div>`;
+  // 본문
+  const body=document.getElementById('weekly-body');
+  if(updated.length===0){
+    body.innerHTML=`<div class="wk-empty">📭 이 주에 수정된 국소가 없습니다<br><span class="wk-empty-sub">${currentRegion?currentRegion+' ':''}지역에 해당 기간 업데이트 기록이 없어요</span></div>`;
+    return;
+  }
+  const DAY=['일','월','화','수','목','금','토'];
+  let html='';
+  Object.keys(byDate).sort().reverse().forEach(dk=>{
+    const [y,mo,da]=dk.split('-').map(Number);
+    const d=new Date(y,mo-1,da);
+    const dow=DAY[d.getDay()];
+    const isToday=(d.toDateString()===new Date().toDateString());
+    html+=`<div class="wk-day"><div class="wk-day-hd"><span class="wk-day-date ${isToday?'today':''}">${mo}월 ${da}일 (${dow})${isToday?' · 오늘':''}</span><span class="wk-day-cnt">${byDate[dk].length}개소</span></div><div class="wk-day-list">`;
+    byDate[dk].forEach(item=>{
+      const l=item.loc;const dt=item.dt;
+      const hasTime=l.lastModified&&Math.abs(dt.getTime()-l.lastModified)<60000;
+      const timeStr=hasTime?`${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')}`:'';
+      // 해당 일자의 변경 내역 추출 (changeLog에서)
+      const dayStart=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()).getTime();
+      const dayEnd=dayStart+86400000;
+      const dayChanges=[];
+      if(l.changeLog&&Array.isArray(l.changeLog)){
+        l.changeLog.forEach(entry=>{
+          if(entry.time>=dayStart&&entry.time<dayEnd&&entry.changes){
+            entry.changes.forEach(ch=>dayChanges.push({...ch,time:entry.time,timeStr:entry.timeStr}));
+          }
+        });
+      }
+      const chId=`wkch-${dk}-${l.name.replace(/[^a-zA-Z0-9가-힣]/g,'').slice(0,20)}-${Math.random().toString(36).slice(2,7)}`;
+      const changesHtml=dayChanges.length>0?`<div class="wk-changes-wrap">
+        <button class="wk-toggle-btn" onclick="event.stopPropagation();toggleChanges('${chId}')">
+          <span class="wk-toggle-icon" id="${chId}-icon">▼</span>
+          <span>변경 내역 ${dayChanges.length}건 보기</span>
+        </button>
+        <div class="wk-changes" id="${chId}" style="display:none">${dayChanges.map(ch=>renderChange(ch)).join('')}</div>
+      </div>`:'';
+      const safeName=l.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+      html+=`<div class="wk-item">
+        <div class="wk-item-head" onclick="openDetailByLoc('${safeName}')">
+          <div class="wk-item-main">
+            <div class="wk-item-name">${l.name}${timeStr?`<span class="wk-time">${timeStr}</span>`:''}</div>
+            <div class="wk-item-sub">${l.do_} ${l.sigungu||''} ${l.address?' · '+l.address:''}</div>
+          </div>
+          <div class="wk-item-meta">
+            ${l.visitor?`<span class="wk-tag visitor">${l.visitor}</span>`:''}
+            ${l.progress?`<span class="wk-tag progress">${l.progress}</span>`:''}
+            ${l.grade&&l.grade!=='N/A'?`<span class="wk-tag grade grade-${l.grade.toLowerCase()}">${l.grade}</span>`:''}
+            ${l.installed?`<span class="wk-tag ch">${l.installed}기</span>`:''}
+          </div>
+        </div>
+        ${changesHtml}
+      </div>`;
+    });
+    html+=`</div></div>`;
+  });
+  body.innerHTML=html;
+}
+function openDetailByLoc(name){
+  const idx=filtered.findIndex(l=>l.name===name);
+  if(idx>=0){openDetail(idx);return;}
+  // filtered에 없으면 전체 필터 초기화 후 열기
+  const gidx=locations.findIndex(l=>l.name===name);
+  if(gidx<0)return;
+  resetFilters();
+  setTimeout(()=>{
+    const i2=filtered.findIndex(l=>l.name===name);
+    if(i2>=0){setView('list');openDetail(i2);}
+  },50);
+}
 
 // ── Naver Map ──
 function initMap(){const center=new naver.maps.LatLng(35.15,126.85);mapInstance=new naver.maps.Map('naver-map',{center,zoom:9,zoomControl:true,zoomControlOptions:{position:naver.maps.Position.TOP_RIGHT}});mapInfoWindow=new naver.maps.InfoWindow({borderWidth:0,backgroundColor:'transparent',disableAnchor:true,pixelOffset:new naver.maps.Point(0,-8)});mapReady=true;updateMapMarkers();}
@@ -311,21 +605,47 @@ function openDetail(li){currentLi=li;editSections={};renderPanel();overlay.class
 window.addEventListener('popstate',function(){if(overlay.classList.contains('open'))closeDetail();});
 function closeDetail(){overlay.classList.remove('open');document.body.style.overflow='';renderGrid();}
 function startEdit(s){editSections[s]=true;renderPanel();}function cancelEdit(s){delete editSections[s];renderPanel();}
-function saveEdit(s){const l=filtered[currentLi];if(!l)return;document.querySelectorAll(`[data-section="${s}"] [data-field]`).forEach(el=>{const f=el.dataset.field,val=el.value;if(f==='updateDate'&&val!==l.updateDate&&l.updateDate){if(!l.updateHistory)l.updateHistory=[];l.updateHistory.unshift(l.updateDate);}l[f]=val;});
+function saveEdit(s){
+  const l=filtered[currentLi];if(!l)return;
+  // 변경된 필드만 감지
+  const changes=[];
+  document.querySelectorAll(`[data-section="${s}"] [data-field]`).forEach(el=>{
+    const f=el.dataset.field,val=el.value;
+    const oldVal=l[f]||'';
+    if(String(val)!==String(oldVal)){
+      changes.push({field:f,before:oldVal,after:val});
+    }
+    if(f==='updateDate'&&val!==l.updateDate&&l.updateDate){
+      if(!l.updateHistory)l.updateHistory=[];
+      l.updateHistory.unshift(l.updateDate);
+    }
+    l[f]=val;
+  });
   // Firebase에 저장
-  const fbFields={};EDITABLE_FIELDS.forEach(f=>{if(l[f]!==undefined)fbFields[f]=l[f];});if(l.updateHistory&&l.updateHistory.length)fbFields.updateHistory=l.updateHistory;fbSave(l.name,fbFields);
-  delete editSections[s];const progs=[...new Set(locations.map(l2=>l2.progress).filter(Boolean))].sort();const psel=document.getElementById('f-progress');const cv=psel.value;psel.innerHTML='<option value="">전체 진행</option>';progs.forEach(p=>psel.innerHTML+=`<option value="${p}">${p}</option>`);psel.value=cv;renderPanel();}
+  const fbFields={};EDITABLE_FIELDS.forEach(f=>{if(l[f]!==undefined)fbFields[f]=l[f];});
+  if(l.updateHistory&&l.updateHistory.length)fbFields.updateHistory=l.updateHistory;
+  fbSave(l.name,fbFields,changes);
+  delete editSections[s];
+  const progs=[...new Set(locations.map(l2=>l2.progress).filter(Boolean))].sort();
+  const psel=document.getElementById('f-progress');const cv=psel.value;
+  psel.innerHTML='<option value="">전체 진행</option>';
+  progs.forEach(p=>psel.innerHTML+=`<option value="${p}">${p}</option>`);
+  psel.value=cv;renderPanel();
+}
 function toggleHistory(){const e=document.getElementById('update-hist');if(e)e.classList.toggle('show');const a=document.getElementById('hist-arrow');if(a)a.textContent=e.classList.contains('show')?'▲':'▼';}
 
 function deleteCurrentUpdate(){
   const l=filtered[currentLi];if(!l)return;
   if(!confirm(`현재 점검일자 "${l.updateDate}"를 삭제하시겠습니까?\n(이전 기록이 있으면 가장 최근 기록이 현재값으로 승격됩니다)`))return;
+  const oldUpdate=l.updateDate;
   if(l.updateHistory&&l.updateHistory.length>0){
     l.updateDate=l.updateHistory.shift();
   }else{
     l.updateDate='';
   }
-  const fbFields={};EDITABLE_FIELDS.forEach(f=>{if(l[f]!==undefined)fbFields[f]=l[f];});fbFields.updateHistory=l.updateHistory||[];fbSave(l.name,fbFields);
+  const changes=[{field:'updateDate',before:oldUpdate,after:l.updateDate,action:'삭제'}];
+  const fbFields={};EDITABLE_FIELDS.forEach(f=>{if(l[f]!==undefined)fbFields[f]=l[f];});fbFields.updateHistory=l.updateHistory||[];
+  fbSave(l.name,fbFields,changes);
   renderPanel();
 }
 
@@ -334,7 +654,9 @@ function deleteUpdateHistory(idx){
   const target=l.updateHistory[idx];
   if(!confirm(`이전 기록 "${target}"를 삭제하시겠습니까?`))return;
   l.updateHistory.splice(idx,1);
-  const fbFields={};EDITABLE_FIELDS.forEach(f=>{if(l[f]!==undefined)fbFields[f]=l[f];});fbFields.updateHistory=l.updateHistory;fbSave(l.name,fbFields);
+  const changes=[{field:'updateHistory',before:target,after:'',action:'이전 기록 삭제'}];
+  const fbFields={};EDITABLE_FIELDS.forEach(f=>{if(l[f]!==undefined)fbFields[f]=l[f];});fbFields.updateHistory=l.updateHistory;
+  fbSave(l.name,fbFields,changes);
   renderPanel();
 }
 
