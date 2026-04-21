@@ -7,7 +7,6 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ec82drlgxq&submodules=geocoder"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap');
   :root{--bg:#f3f5f8;--surface:#fff;--surface2:#eef6fb;--border:#d4e5f0;--border2:#b8cfe0;--text:#1b2a4a;--text2:#4a6382;--text3:#94a3b8;--accent:#0e7490;--accent-bg:#eef6fb;--orange:#f97316;--orange-bg:#fff7ed;--danger:#dc2626;--danger-bg:#fef2f2;--warning:#ea580c;--warning-bg:#fff7ed;--caution:#2563eb;--caution-bg:#eff6ff;--success:#16a34a;--success-bg:#f0fdf4;--r:10px;--rs:6px;--header-bg:linear-gradient(135deg,#0f172a,#1e3a5f);--header-text:#fff;--header-sub:rgba(255,255,255,.55);--header-btn-bg:rgba(255,255,255,.08);--header-btn-border:rgba(255,255,255,.2);--header-btn-text:rgba(255,255,255,.85);--overlay-bg:rgba(27,42,74,.4)}
@@ -17,9 +16,11 @@
   .logo{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--header-text)}.logo-dot{width:26px;height:26px;border-radius:6px;background:linear-gradient(135deg,#f97316,#fb923c);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
   .hd-right{display:flex;align-items:center;gap:10px}.hd-count{font-size:12px;color:var(--header-sub);background:var(--header-btn-bg);padding:3px 10px;border-radius:20px}
   .hd-btn{border:1px solid var(--header-btn-border);background:var(--header-btn-bg);color:var(--header-btn-text);border-radius:var(--rs);padding:5px 12px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .2s;font-family:'Pretendard',sans-serif}.hd-btn:hover{background:rgba(255,255,255,.15)}
-  .view-toggle{display:flex;gap:0}.view-btn{padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--header-btn-border);background:var(--header-btn-bg);color:var(--header-btn-text);font-family:'Pretendard',sans-serif;transition:all .2s}.view-btn:first-child{border-radius:var(--rs) 0 0 var(--rs)}.view-btn:last-child{border-radius:0 var(--rs) var(--rs) 0}.view-btn.active{background:var(--orange);border-color:var(--orange);color:#fff}
   .region-tabs{background:var(--surface);border-bottom:1px solid var(--border);padding:.6rem 1.5rem;display:flex;gap:6px;align-items:center}
   .region-tab{padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);transition:all .2s;display:flex;align-items:center;gap:8px}.region-tab:hover{border-color:var(--accent);color:var(--accent)}.region-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(14,116,144,.25)}.region-tab .tab-cnt{font-size:11px;font-weight:600;padding:1px 7px;border-radius:10px;background:rgba(255,255,255,.2)}.region-tab:not(.active) .tab-cnt{background:var(--surface2);color:var(--text3)}.region-tab.all{background:var(--surface2);border-color:var(--border);color:var(--text2)}.region-tab.all.active{background:var(--text);color:#fff;border-color:var(--text)}
+  .region-tab.weekly-tab{margin-left:8px;border-color:#fb923c;color:#ea580c;background:#fff7ed}.region-tab.weekly-tab:hover{background:#ffedd5;border-color:#f97316;color:#c2410c}.region-tab.weekly-tab.active{background:#f97316;border-color:#f97316;color:#fff;box-shadow:0 2px 8px rgba(249,115,22,.35)}body.dark .region-tab.weekly-tab{background:rgba(249,115,22,.12);border-color:#c2410c;color:#fb923c}body.dark .region-tab.weekly-tab.active{background:#ea580c;border-color:#ea580c;color:#fff}
+  .region-tab.list-tab{margin-left:8px;border-color:#60a5fa;color:#2563eb;background:#eff6ff}.region-tab.list-tab:hover{background:#dbeafe;border-color:#3b82f6;color:#1d4ed8}.region-tab.list-tab.active{background:#3b82f6;border-color:#3b82f6;color:#fff;box-shadow:0 2px 8px rgba(59,130,246,.35)}body.dark .region-tab.list-tab{background:rgba(59,130,246,.12);border-color:#1d4ed8;color:#60a5fa}body.dark .region-tab.list-tab.active{background:#2563eb;border-color:#2563eb;color:#fff}
+  .region-tab.list-tab + .region-tab.weekly-tab{margin-left:0}
   .stats-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:.6rem 1.5rem;display:flex;gap:8px;flex-wrap:wrap}
   .stat-chip{display:flex;align-items:center;gap:6px;padding:.3rem .8rem;border-radius:20px;border:1px solid;font-size:11px;font-weight:600;cursor:pointer;transition:transform .15s}.stat-chip:hover{transform:translateY(-1px)}.stat-chip.danger{background:var(--danger-bg);border-color:#fecaca;color:var(--danger)}.stat-chip.warning{background:var(--warning-bg);border-color:#fed7aa;color:var(--warning)}.stat-chip.caution{background:var(--caution-bg);border-color:#bfdbfe;color:var(--caution)}.stat-chip.success{background:var(--success-bg);border-color:#bbf7d0;color:var(--success)}.stat-chip.total{background:var(--surface2);border-color:var(--border);color:var(--text2)}.stat-chip.active-filter{outline:2px solid var(--orange);outline-offset:1px}.stat-num{font-size:16px}
   .filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:.6rem 1.5rem;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
@@ -41,11 +42,6 @@
   .c-foot{margin-top:6px;padding-top:6px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:4px}.c-rev{font-size:10px;color:var(--text2)}.c-rev span{font-weight:700;color:var(--text)}
   .dot-mini{display:flex;align-items:flex-end;height:24px;flex:1;max-width:100px}.dot-mini svg{width:100%;height:100%;overflow:visible}
   .sigungu-divider{grid-column:1/-1;display:flex;align-items:center;gap:8px;padding:2px 0;margin-top:2px}.sigungu-badge{font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-bg);border:1px solid var(--border);padding:1px 10px;border-radius:14px}.sigungu-line{flex:1;height:1px;background:var(--border)}
-  /* map */
-  #map-container{display:none;width:100%;height:calc(100vh - 170px);position:relative}#map-container.show{display:block}
-  .map-loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--surface);padding:20px 40px;border-radius:var(--r);box-shadow:0 4px 20px rgba(0,0,0,.15);font-size:14px;font-weight:600;color:var(--text);z-index:10;display:flex;align-items:center;gap:10px}
-  .map-spinner{width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
-  .map-legend{position:absolute;bottom:20px;left:20px;background:var(--surface);border-radius:var(--rs);padding:10px 14px;box-shadow:0 2px 12px rgba(0,0,0,.12);z-index:5;font-size:11px;display:flex;flex-direction:column;gap:4px}.map-legend-item{display:flex;align-items:center;gap:6px}.map-legend-dot{width:10px;height:10px;border-radius:50%}
   /* panel */
   #overlay{display:none;position:fixed;inset:0;background:var(--overlay-bg);z-index:200;align-items:stretch;justify-content:flex-end;backdrop-filter:blur(4px)}#overlay.open{display:flex}
   #panel{width:min(720px,100vw);background:var(--surface);overflow-y:auto;height:100vh;display:flex;flex-direction:column;box-shadow:-4px 0 32px rgba(0,0,0,.2)}
@@ -218,11 +214,6 @@
   <div class="logo"><div class="logo-dot">H</div>HUMAXEV 충전소 관리 CRM</div>
   <div class="hd-right">
     <span class="hd-count" id="hd-count"></span>
-    <div class="view-toggle">
-      <button class="view-btn active" id="btn-list" onclick="setView('list')">📋 목록</button>
-      <button class="view-btn" id="btn-map" onclick="setView('map')">🗺️ 지도</button>
-      <button class="view-btn" id="btn-weekly" onclick="setView('weekly')">📅 주간</button>
-    </div>
     <button type="button" class="hd-btn" onclick="toggleDark()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span id="dark-label">다크</span></button>
   </div>
 </div>
@@ -260,11 +251,6 @@
   <button class="backup-btn import" onclick="document.getElementById('backup-file').click()">📂 백업 가져오기</button>
   <input type="file" id="backup-file" accept=".json" onchange="importBackup(event)">
   <span class="backup-status" id="backup-status"></span>
-</div>
-<div id="map-container">
-  <div class="map-loading" id="map-loading"><div class="map-spinner"></div><span id="map-loading-text">주소를 좌표로 변환 중...</span></div>
-  <div id="naver-map" style="width:100%;height:100%"></div>
-  <div class="map-legend"><div class="map-legend-item"><div class="map-legend-dot" style="background:#dc2626"></div>3개월 이내</div><div class="map-legend-item"><div class="map-legend-dot" style="background:#ea580c"></div>6개월 이내</div><div class="map-legend-item"><div class="map-legend-dot" style="background:#2563eb"></div>1년 이내</div><div class="map-legend-item"><div class="map-legend-dot" style="background:#16a34a"></div>1년 이상</div><div class="map-legend-item"><div class="map-legend-dot" style="background:#94a3b8"></div>만료/없음</div></div>
 </div>
 <div id="weekly-container">
   <div class="weekly-head">
@@ -335,9 +321,6 @@ function fbLoadAndApply(){
 const REGION_ORDER=['광주','전남','전북'];const REGION_LABEL={'광주':'광주','전남':'전남','전북':'전북'};
 const C={no:0,do_:1,sigungu:2,name:3,parking:4,ratio:5,diff:6,installed:7,slow_:8,fast:9,expYear:10,endDate:11,rev1:12,rev2:13,rev3:14,fastRevenue:15,grade:16,progress:17,updateDate:18,visitor:19,otherCPO:20,otherBrand:21,hevParking:22,fieldNote:23,etcNote:24,address:25,directions:26,memo:27,etcInfo:28};
 const TODAY=new Date();let locations=[],filtered=[];let editSections={},currentRegion='',currentLi=-1,currentView='list';
-const URG_COLORS={danger:'#dc2626',warning:'#ea580c',caution:'#2563eb',success:'#16a34a',none:'#94a3b8'};
-let mapInstance=null,mapMarkers=[],mapInfoWindow=null,geocodeCache={},mapReady=false;
-
 function toggleDark(){document.body.classList.toggle('dark');const d=document.body.classList.contains('dark');localStorage.setItem('hev_crm_dark',d?'1':'0');document.getElementById('dark-label').textContent=d?'라이트':'다크';}
 (function(){if(localStorage.getItem('hev_crm_dark')==='1'){document.body.classList.add('dark');setTimeout(()=>{const e=document.getElementById('dark-label');if(e)e.textContent='라이트';},0);}})();
 let mdTarget=null;const overlay=document.getElementById('overlay');overlay.addEventListener('mousedown',e=>{mdTarget=e.target});overlay.addEventListener('mouseup',e=>{if(mdTarget===overlay&&e.target===overlay)closeDetail();mdTarget=null;});
@@ -379,15 +362,14 @@ function processRows(allRows){
   locations.sort((a,b)=>{const ai=REGION_ORDER.indexOf(a.do_),bi=REGION_ORDER.indexOf(b.do_);if(ai!==bi)return(ai===-1?99:ai)-(bi===-1?99:bi);return(a.sigungu||'').localeCompare(b.sigungu||'','ko');});
   buildRegionTabs();buildFilters();buildStats();applyFilters();
 }
-function buildRegionTabs(){const cnt={};const ch={};REGION_ORDER.forEach(r=>{cnt[r]=0;ch[r]=0;});let totalCh=0;locations.forEach(l=>{if(cnt[l.do_]!==undefined){cnt[l.do_]++;ch[l.do_]+=Number(l.installed)||0;}totalCh+=Number(l.installed)||0;});const tabs=document.getElementById('region-tabs');const showCh=currentRegion?ch[currentRegion]:totalCh;const showCnt=currentRegion?cnt[currentRegion]:locations.length;let h=`<div class="region-tab all ${currentRegion===''?'active':''}" onclick="setRegion('')">전체 <span class="tab-cnt">${locations.length}</span></div>`;REGION_ORDER.forEach(r=>{h+=`<div class="region-tab ${currentRegion===r?'active':''}" onclick="setRegion('${r}')">${REGION_LABEL[r]} <span class="tab-cnt">${cnt[r]}</span></div>`;});h+=`<div class="region-charger-info"><span class="rci-label">총 충전기</span><span class="rci-num">${showCh.toLocaleString()}</span><span class="rci-unit">기</span></div>`;tabs.innerHTML=h;}
-function setRegion(r){currentRegion=r;buildRegionTabs();updateSigungu();buildStats();applyFilters();if(currentView==='map')updateMapMarkers();}
+function buildRegionTabs(){const cnt={};const ch={};REGION_ORDER.forEach(r=>{cnt[r]=0;ch[r]=0;});let totalCh=0;locations.forEach(l=>{if(cnt[l.do_]!==undefined){cnt[l.do_]++;ch[l.do_]+=Number(l.installed)||0;}totalCh+=Number(l.installed)||0;});const tabs=document.getElementById('region-tabs');const showCh=currentRegion?ch[currentRegion]:totalCh;const showCnt=currentRegion?cnt[currentRegion]:locations.length;let h=`<div class="region-tab all ${currentRegion===''?'active':''}" onclick="setRegion('')">전체 <span class="tab-cnt">${locations.length}</span></div>`;REGION_ORDER.forEach(r=>{h+=`<div class="region-tab ${currentRegion===r?'active':''}" onclick="setRegion('${r}')">${REGION_LABEL[r]} <span class="tab-cnt">${cnt[r]}</span></div>`;});h+=`<div class="region-tab list-tab ${currentView==='list'?'active':''}" id="btn-list" onclick="setView('list')">📋 목록</div>`;h+=`<div class="region-tab weekly-tab ${currentView==='weekly'?'active':''}" id="btn-weekly" onclick="setView('weekly')">📅 주간</div>`;h+=`<div class="region-charger-info"><span class="rci-label">총 충전기</span><span class="rci-num">${showCh.toLocaleString()}</span><span class="rci-unit">기</span></div>`;tabs.innerHTML=h;}
+function setRegion(r){currentRegion=r;buildRegionTabs();updateSigungu();buildStats();applyFilters();}
 function buildFilters(){const progs=[...new Set(locations.map(l=>l.progress).filter(Boolean))].sort();const psel=document.getElementById('f-progress');psel.innerHTML='<option value="">전체 진행</option>';progs.forEach(p=>psel.innerHTML+=`<option value="${p}">${p}</option>`);updateSigungu();}
 function updateSigungu(){const base=currentRegion?locations.filter(l=>l.do_===currentRegion):locations;const sigs=[...new Set(base.map(l=>l.sigungu).filter(Boolean))].sort();const sel=document.getElementById('f-sigungu');sel.innerHTML='<option value="">전체 시구군</option>';sigs.forEach(s=>sel.innerHTML+=`<option value="${s}">${s}</option>`);}
 function resetFilters(){document.getElementById('search').value='';document.getElementById('f-sigungu').value='';document.getElementById('f-period').value='';document.getElementById('f-grade').value='';document.getElementById('f-progress').value='';document.getElementById('f-visit').value='';applyFilters();}
 function applyFilters(){const q=document.getElementById('search').value.toLowerCase();const sv=document.getElementById('f-sigungu').value;const pv=document.getElementById('f-period').value;const gv=document.getElementById('f-grade').value;const prv=document.getElementById('f-progress').value;const vv=document.getElementById('f-visit').value;
   filtered=locations.filter(l=>{if(currentRegion&&l.do_!==currentRegion)return false;if(q&&![l.name,l.address,l.do_,l.sigungu].join(' ').toLowerCase().includes(q))return false;if(sv&&l.sigungu!==sv)return false;if(pv){const ui={danger:['danger'],warning:['danger','warning'],caution:['danger','warning','caution'],success:['success'],none:['none']};if(!ui[pv]||!ui[pv].includes(l.urgency))return false;}if(gv&&l.grade!==gv)return false;if(prv&&l.progress!==prv)return false;if(vv){const vs=visitStatus(l.updateDate);if(vv!==vs)return false;}return true;});
   renderGrid();{const totalChargers=filtered.reduce((s,l)=>s+(Number(l.installed)||0),0);const totalSlow=filtered.reduce((s,l)=>s+(Number(l.slow_)||0),0);const totalFast=filtered.reduce((s,l)=>s+(Number(l.fast)||0),0);document.getElementById('hd-count').innerHTML=`<b>${currentRegion||'전체'}</b> ${filtered.length}개소 · 충전기 <b>${totalChargers}</b>기 (완속 ${totalSlow} · 급속 ${totalFast})`;}
-  if(currentView==='map')updateMapMarkers();
 }
 function buildStats(){const base=currentRegion?locations.filter(l=>l.do_===currentRegion):locations;const cnt={danger:0,warning:0,caution:0,success:0,none:0};base.forEach(l=>cnt[l.urgency]++);const cumul={danger:cnt.danger,warning:cnt.danger+cnt.warning,caution:cnt.danger+cnt.warning+cnt.caution,success:cnt.success,none:cnt.none};const lbl={danger:'3개월 이내',warning:'6개월 이내',caution:'1년 이내',success:'1년 이상',none:'만료/없음'};
   const vcnt={recent:0,old:0,never:0};base.forEach(l=>vcnt[visitStatus(l.updateDate)]++);
@@ -411,13 +393,9 @@ function renderGrid(){const grid=document.getElementById('grid');const empty=doc
 // ── View Toggle ──
 function setView(mode){
   currentView=mode;
-  document.getElementById('btn-list').classList.toggle('active',mode==='list');
-  document.getElementById('btn-map').classList.toggle('active',mode==='map');
-  document.getElementById('btn-weekly').classList.toggle('active',mode==='weekly');
+  buildRegionTabs(); // 목록/주간 탭 active 상태 재반영
   document.getElementById('main-view').classList.toggle('hide',mode!=='list');
-  document.getElementById('map-container').classList.toggle('show',mode==='map');
   document.getElementById('weekly-container').classList.toggle('show',mode==='weekly');
-  if(mode==='map'){if(!mapReady)initMap();else updateMapMarkers();}
   if(mode==='weekly')renderWeekly();
 }
 
@@ -586,19 +564,6 @@ function openDetailByLoc(name){
     if(i2>=0){setView('list');openDetail(i2);}
   },50);
 }
-
-// ── Naver Map ──
-function initMap(){const center=new naver.maps.LatLng(35.15,126.85);mapInstance=new naver.maps.Map('naver-map',{center,zoom:9,zoomControl:true,zoomControlOptions:{position:naver.maps.Position.TOP_RIGHT}});mapInfoWindow=new naver.maps.InfoWindow({borderWidth:0,backgroundColor:'transparent',disableAnchor:true,pixelOffset:new naver.maps.Point(0,-8)});mapReady=true;updateMapMarkers();}
-
-async function updateMapMarkers(){if(!mapInstance)return;mapMarkers.forEach(m=>m.setMap(null));mapMarkers=[];const locs=filtered;const loading=document.getElementById('map-loading');const loadText=document.getElementById('map-loading-text');loading.style.display='flex';const bounds=new naver.maps.LatLngBounds();let done=0;
-  for(const l of locs){const addr=l.address||`${l.do_} ${l.sigungu}`;if(!addr)continue;let coord=geocodeCache[addr];if(!coord){coord=await geocodeAddr(addr);if(coord)geocodeCache[addr]=coord;}if(!coord)continue;
-    const ll=new naver.maps.LatLng(coord.y,coord.x);bounds.extend(ll);const color=URG_COLORS[l.urgency]||URG_COLORS.none;
-    const marker=new naver.maps.Marker({position:ll,map:mapInstance,icon:{content:`<div style="width:14px;height:14px;background:${color};border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3);cursor:pointer"></div>`,anchor:new naver.maps.Point(7,7)}});
-    const loc=l;naver.maps.Event.addListener(marker,'click',()=>{const ym=daysToYM(loc.daysLeft);mapInfoWindow.setContent(`<div style="background:var(--surface);border-radius:10px;padding:12px 16px;box-shadow:0 4px 20px rgba(0,0,0,.15);max-width:280px;font-family:Pretendard,sans-serif"><div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">${loc.name}</div><div style="font-size:11px;color:var(--text3);margin-bottom:6px">${loc.do_} ${loc.sigungu}</div><div style="font-size:12px;font-weight:700;color:${color};margin-bottom:4px">${urgLabel(loc.daysLeft)} ${ym||''}</div><div style="font-size:11px;color:var(--text2)">충전기 ${loc.installed||'-'}기 · 3월 ${fmtRev(loc.rev3)}원/기</div>${loc.grade?`<div style="font-size:11px;color:var(--text3);margin-top:2px">${loc.grade}등급${loc.progress?' · '+loc.progress:''}</div>`:''}</div>`);mapInfoWindow.open(mapInstance,marker);});
-    mapMarkers.push(marker);done++;if(done%15===0)loadText.textContent=`주소 변환 중... (${done}/${locs.length})`;
-  }loading.style.display='none';if(done>0)mapInstance.fitBounds(bounds,{top:60,right:60,bottom:60,left:60});}
-
-function geocodeAddr(addr){return new Promise(resolve=>{naver.maps.Service.geocode({query:addr},function(status,response){if(status!==naver.maps.Service.Status.OK||!response.v2.addresses.length){const short=addr.split(/[,(]/)[0].trim();if(short!==addr&&short.length>4){naver.maps.Service.geocode({query:short},function(s2,r2){if(s2===naver.maps.Service.Status.OK&&r2.v2.addresses.length){const a=r2.v2.addresses[0];resolve({x:parseFloat(a.x),y:parseFloat(a.y)});}else resolve(null);});}else resolve(null);return;}const a=response.v2.addresses[0];resolve({x:parseFloat(a.x),y:parseFloat(a.y)});});});}
 
 // ── Detail Panel ──
 function openDetail(li){currentLi=li;editSections={};renderPanel();overlay.classList.add('open');document.body.style.overflow='hidden';history.pushState({panel:true},'');}
